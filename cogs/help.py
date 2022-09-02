@@ -30,9 +30,15 @@ class HelpDropdown(nextcord.ui.Select):
             cog_selected = self.bot.get_cog("General")
             embed = Embed(title=self.values[0], description=cog_selected.description, colour=self.bot.colour)
             embed.set_thumbnail(url=self.bot.icon)
+            
+            cmds_text = ''
+            count = 0
             for cmd in cog_selected.get_commands():
                 if not cmd.hidden:
-                    embed.add_field(name=f"{self.bot.command_prefix}{cmd.name}", value=cmd.help, inline=True)
+                    count += 1
+                    cmds_text += f"{cmd.name}, "
+            
+            embed.add_field(name=f"Commands [{count}]", value=cmds_text, inline=True)
             await interaction.response.send_message(embed=embed)
 
 class DropdownView(nextcord.ui.View):
