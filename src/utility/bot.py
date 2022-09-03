@@ -1,11 +1,12 @@
+import os
+
 import nextcord
 from nextcord.ext.commands import Bot
-import os
 
 COGS = (f"cogs.{ext[:-3]}" for ext in os.listdir("./cogs") if ext.endswith(".py"))
 
-class Vortex(Bot):
 
+class Vortex(Bot):
     def __init__(self) -> None:
         super().__init__(
             command_prefix="-",
@@ -30,5 +31,4 @@ class Vortex(Bot):
 
     # Called when the bot is started
     async def on_ready(self) -> None:
-                
         print("Bot is online.")
