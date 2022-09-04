@@ -24,13 +24,9 @@
 
 
 
---- 
-
 #### Vortex is an self-hostable, open source discord bot.
 
 
 ## Features
-
----
 
 Not much as of yet.

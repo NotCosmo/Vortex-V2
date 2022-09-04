@@ -11,8 +11,6 @@
     + [ ] isort
     + [ ] pyright(?)
 
----
-
 ## Bot specific
 + Main
   + [ ] Chose License
@@ -22,8 +20,6 @@
     + SQL or NoSQL?
   + [ ] Templates
   + [ ] Fill .env.example file
-
----
 
 ## Future ideas
 + Commands
