@@ -1,6 +1,5 @@
 from nextcord.ext.commands import Cog, command
-
-from src.utility.bot import Vortex
+from utility.bot import Vortex
 
 
 class General(Cog, description="General commands of the bot."):

@@ -1,8 +1,7 @@
 import nextcord
 from nextcord import Embed, Interaction
 from nextcord.ext.commands import Cog, Context, command
-
-from src.utility.bot import Vortex
+from utility.bot import Vortex
 
 
 class HelpDropdown(nextcord.ui.Select):
