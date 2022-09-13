@@ -3,7 +3,7 @@ import os
 import nextcord
 from nextcord.ext.commands import Bot
 
-COGS = (f"cogs.{ext[:-3]}" for ext in os.listdir("./cogs") if ext.endswith(".py"))
+COGS = (f"cogs.{ext[:-3]}" for ext in os.listdir("./src/cogs") if ext.endswith(".py"))
 
 
 class Vortex(Bot):
@@ -25,7 +25,7 @@ class Vortex(Bot):
             try:
                 self.load_extension(cog)
             except Exception as e:
-                print(f"Could not load {cog} due to:\n{e}")
+                raise
                 
         await super().start(os.environ['token'])
 

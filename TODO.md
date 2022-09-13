@@ -16,6 +16,10 @@
   + [ ] Chose License
   + [ ] Implement commands
     + List of commands which are going to be transferred
+    + Animal commands (dog, cat, ...)
+    + Rate commands (gay, racist, simp, sus, ...)
+    + Userinfo, serverinfo
+    + Avatar command
   + [ ] Setup Database
     + SQL or NoSQL?
   + [ ] Templates
