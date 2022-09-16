@@ -1,3 +1,5 @@
+import logging
+
 import nextcord
 from nextcord import Embed, Interaction
 from nextcord.ext.commands import Cog, Context, command
@@ -65,5 +67,5 @@ class Help(Cog):
 
 
 def setup(bot: Vortex) -> None:
-    print("Help loaded.")
     bot.add_cog(Help(bot))
+    logging.info(f"{Help.__class__.__name__} cog loaded.")
