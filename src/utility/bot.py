@@ -4,9 +4,13 @@ import datetime
 import time
 from typing import Optional
 
+from dotenv import load_dotenv
 import aiohttp
 import nextcord
 from nextcord.ext.commands import Bot
+
+
+load_dotenv()
 
 
 class Vortex(Bot):

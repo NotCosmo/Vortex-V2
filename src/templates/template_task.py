@@ -4,7 +4,7 @@ from datetime import time
 from nextcord import Embed, Member
 from nextcord.ext import commands, tasks
 
-from src.main import Vortex
+from src.utility.bot import Vortex
 
 
 class TemplateTask(commands.Cog):

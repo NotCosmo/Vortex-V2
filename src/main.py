@@ -1,10 +1,9 @@
 from utility.bot import Vortex
 
-bot = Vortex()
-bot.remove_command("help")
-
 
 def main() -> None:
+    bot = Vortex()
+    bot.remove_command("help")
     bot.run_bot()
 
 

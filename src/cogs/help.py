@@ -3,7 +3,7 @@ import logging
 import nextcord
 from nextcord import Embed, Interaction
 from nextcord.ext.commands import Cog, Context, command
-from utility.bot import Vortex
+from src.utility.bot import Vortex
 
 
 class HelpDropdown(nextcord.ui.Select):
