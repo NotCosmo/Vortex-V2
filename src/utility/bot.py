@@ -12,6 +12,8 @@ from nextcord.ext.commands import Bot
 
 load_dotenv()
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s]: %(message)s")
+
 
 class Vortex(Bot):
     def __init__(self) -> None:

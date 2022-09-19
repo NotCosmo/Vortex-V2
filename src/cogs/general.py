@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from platform import python_version
 from time import time
@@ -337,5 +338,5 @@ class General(Cog, description="General commands of the bot."):
 
 
 def setup(bot: Vortex) -> None:
-    print("General cog loaded.")
     bot.add_cog(General(bot))
+    logging.info(f"{General.__class__.__name__} cog loaded.")
