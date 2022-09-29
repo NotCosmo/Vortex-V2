@@ -32,7 +32,7 @@ class HelpDropdown(ui.Select):
             embed = Embed(
                 title=self.values[0],
                 description=cog_selected.description,
-                colour=self.bot.colour,
+                colour=self.bot.main_color,
             )
             embed.set_thumbnail(url=self.bot.icon)
 
