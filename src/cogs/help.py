@@ -1,16 +1,15 @@
-import logging
+from logging import info
 
-import nextcord
-from nextcord import Embed, Interaction
+from nextcord import Embed, Interaction, ui, SelectOption
 from nextcord.ext.commands import Cog, Context, command
 from src.utility.bot import Vortex
 
 
-class HelpDropdown(nextcord.ui.Select):
+class HelpDropdown(ui.Select):
     def __init__(self, bot: Vortex):
         options = [
-            nextcord.SelectOption(label="ℹ️ General", description="Shows general commands."),
-            nextcord.SelectOption(
+            SelectOption(label="ℹ️ General", description="Shows general commands."),
+            SelectOption(
                 label=":hammer_pick: Moderation", description="Shows moderation commands."
             ),
         ]
@@ -41,7 +40,7 @@ class HelpDropdown(nextcord.ui.Select):
             await interaction.response.send_message(embed=embed)
 
 
-class DropdownView(nextcord.ui.View):
+class DropdownView(ui.View):
     def __init__(self, bot: Vortex):
         self.bot: Vortex = bot
         super().__init__()
@@ -68,4 +67,4 @@ class Help(Cog):
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(Help(bot))
-    logging.info(f"{Help.__class__.__name__} cog loaded.")
+    info(f"{Help.__class__.__name__} cog loaded.")

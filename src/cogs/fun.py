@@ -1,4 +1,4 @@
-import logging
+from logging import info
 from random import randint
 
 from nextcord import Member, Embed
@@ -13,13 +13,14 @@ class Fun(Cog, description="Fun commands of the bot."):
         self.bot: Vortex = bot
 
     @command(name="penis", aliases=["pp", "cock", "dick"], brief="Get dick size")
-    async def penis(self, ctx: Context, member: Member = None):
+    async def penis(self, ctx: Context, member: Member | None = None):
         member = member or ctx.author
         amount_cm = randint(0, 40)
         amount_inch = amount_cm / 2.54
 
+        name = f"{member.display_name}'s" if member.display_name[-1] != "s" else member.display_name
         penis = Embed(
-            title=f"{member.name}s dick is...", description=f"8{amount_cm * '='}D || {amount_cm} cm ({amount_inch:.3f} inch) long", color=self.bot.main_color
+            title=f"{name}s dick is...", description=f"8{amount_cm * '='}D || {amount_cm} cm ({amount_inch:.3f} inch) long", color=self.bot.main_color
         )
 
         if amount_cm == 40:
@@ -46,7 +47,7 @@ class Fun(Cog, description="Fun commands of the bot."):
                 await ctx.send(str(link))
 
     @command(name="mock", brief="Mock a user.")
-    async def mock(self, ctx: Context, *, msg):
+    async def mock(self, ctx: Context, *, msg: str):
         x = ""
         i = True
         for letter in msg:
@@ -57,14 +58,14 @@ class Fun(Cog, description="Fun commands of the bot."):
             if letter != " ":
                 i = not i
 
-        result = f"{x}, `~{ctx.author.nick if ctx.author.nick else ctx.author}`"
+        result = f"{x}, `~{ctx.author.display_name}`"
         if len(result) > 2000:
             return await ctx.send("This message is too long to send.")
 
-        await ctx.send(f"{x} `~{ctx.author.nick if ctx.author.nick else ctx.author}`")
+        await ctx.send(result)
         await ctx.message.delete()
 
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(Fun(bot))
-    logging.info(f"{Fun.__class__.__name__} cog loaded.")
+    info(f"{Fun.__class__.__name__} cog loaded.")

@@ -126,15 +126,10 @@ def create_cog_function(cog_name: str):
     class_name = camel_case(cog_name)
     path = os.getcwd()
     with open(f"{path}\\cogs\\{cog_name}.py", "w") as f:
-        to_write = f"""import math
-
-import nextcord
-from nextcord import Embed, Message, Member, Guild
+        to_write = f"""from nextcord import Embed, Message, Member
 from nextcord.ext.commands import Cog, command, group, Context
-from rich import print
 
-from constants import GuildConstants as GC
-from custom_bot import CustomBot
+from src.utility.bot import Vortex
 
 
 class {class_name}(Cog):

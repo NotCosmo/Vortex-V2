@@ -1,12 +1,12 @@
-import logging
+from logging import info
 from datetime import datetime
 from platform import python_version
 from time import time
 
 import xmltodict
 import humanize
-import nextcord
-from nextcord import Member, Embed, Spotify
+from nextcord import __version__ as nc_ver
+from nextcord import Member, Embed, Spotify, Color
 from nextcord.ext.commands import Cog, command, Context, guild_only
 from psutil import Process, virtual_memory
 
@@ -35,19 +35,20 @@ class General(Cog, description="General commands of the bot."):
         await message.edit(content=f"DWSP latency: {self.bot.latency * 1000:,.0f}ms || Response time: {(end - start) * 1000:,.0f}ms")
 
     @command(name="userinfo", aliases=["ui"], brief="Shows a bunch of stuff about a user.")
-    async def userinfo(self, ctx: Context, member: Member = None):
+    async def userinfo(self, ctx: Context, member: Member | None = None):
         member = member or ctx.author
         joined_days_ago = (datetime.today().replace(tzinfo=member.joined_at.tzinfo) - member.joined_at).days
         created_days_ago = (datetime.today().replace(tzinfo=member.joined_at.tzinfo) - member.created_at).days
         booster = member.premium_since.strftime("%H:%M:%S, %d.%m.%Y") if member.premium_since else "No boosts."
         nick = member.nick or "No custom nickname"
 
-        colors = {"online": nextcord.Color.green(),
-                  "idle": nextcord.Color.yellow(),
-                  "dnd": nextcord.Color.red(),
-                  "do_not_disturb": nextcord.Color.red(),
-                  "offline": 0x696969,
-                  "invisible": 0x696969
+        colors = {
+            "online": Color.green(),
+            "idle": Color.yellow(),
+            "dnd": Color.red(),
+            "do_not_disturb": Color.red(),
+            "offline": 0x696969,
+            "invisible": 0x696969
                   }
 
         userinfo = Embed(title=f"{member} || {member.id}", description=f"Avatar URL: {member.avatar.with_size(4096).url}", color=colors.get(member.raw_status))
@@ -135,7 +136,7 @@ class General(Cog, description="General commands of the bot."):
         )
         if ctx.guild.premium_tier > 0:
             serverinfo.add_field(
-                name="Boosting stats", value=f"```Nitro level: {ctx.guild.premium_tier}\nBoost Count: {ctx.guild.premium_subscription_count}```", inline=False
+                name="Boosting stats", value=f"```Boost level: {ctx.guild.premium_tier}\nBoost Count: {ctx.guild.premium_subscription_count}```", inline=False
             )
         await ctx.send(embed=serverinfo)
 
@@ -152,7 +153,7 @@ class General(Cog, description="General commands of the bot."):
         fields = [
             ("Bot version", f"v{self.bot.major_version}.{self.bot.minor_version}.{self.bot.patch_version}", True),
             ("Python version", python_version(), True),
-            ("Nextcord version", nextcord.__version__, True),
+            ("Nextcord version", nc_ver, True),
             ("Uptime", self.bot.get_uptime(), True),
             ("Memory usage", f"{mem_usage:,.3f} MiB / {mem_total:,.3f} MiB ({mem_of_total:.3f}%)", True),
             ("Popularity", f"{len(self.bot.users):,} users in {len(self.bot.guilds):,} servers", True),
@@ -164,7 +165,7 @@ class General(Cog, description="General commands of the bot."):
         await ctx.send(embed=stats_embed)
 
     @command(name="spotify", brief="Share what you are currently listening too on spotify.")
-    async def spotify(self, ctx: Context, member: Member = None):
+    async def spotify(self, ctx: Context, member: Member | None = None):
         member = member or ctx.author
         for activity in member.activities:
             if isinstance(activity, Spotify):
@@ -174,7 +175,7 @@ class General(Cog, description="General commands of the bot."):
                     title=f"{activity.title} - {artists}",
                     description=f"from the album **{activity.album}**",
                     url=activity.track_url,
-                    color=nextcord.Color.green(),
+                    color=Color.green(),
                 )
                 spotify.set_thumbnail(url=activity.album_cover_url)
                 spotify.add_field(name="Duration", value=str(activity.duration).split(".")[0], inline=True)
@@ -221,7 +222,7 @@ class General(Cog, description="General commands of the bot."):
                 await ctx.send(f"Unsupported media_type ({data.get('media_type')}), click link to see which data is present\n" f"<{base_url}?api_key=DEMO_KEY>")
 
     @command(name="weather", brief="Get weather info")
-    async def weather(self, ctx: Context, *, city):
+    async def weather(self, ctx: Context, *, city: str):
         US_EPA_INDEX = {1: "Good", 2: "Moderate", 3: "Unhealthy for sensitive group", 4: "Unhealthy", 5: "Very unhealthy", 6: "Hazardous"}
         WIND_DIRECTIONS = {
             "N": "North",
@@ -291,7 +292,7 @@ class General(Cog, description="General commands of the bot."):
         await ctx.send(embed=weather_embed)
 
     @command(name="whatpulse", aliases=["wp"], brief="Get stats from a whatpulse user")
-    async def whatpulse(self, ctx: Context, username):
+    async def whatpulse(self, ctx: Context, username: str):
         url = f"https://api.whatpulse.org/user.php?user={username}"
         async with self.bot.aiohttp_session.get(url) as r:
             if r.status == 200:
@@ -339,4 +340,4 @@ class General(Cog, description="General commands of the bot."):
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(General(bot))
-    logging.info(f"{General.__class__.__name__} cog loaded.")
+    info(f"{General.__class__.__name__} cog loaded.")

@@ -1,6 +1,5 @@
 import logging
 
-import nextcord
 from nextcord import Member, Embed
 from nextcord.ext.commands import Cog, command, Context
 
