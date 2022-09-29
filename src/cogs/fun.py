@@ -1,8 +1,8 @@
 from logging import info
 from random import randint
 
-from nextcord import Member, Embed
-from nextcord.ext.commands import Cog, command, Context
+from nextcord import Embed, Member
+from nextcord.ext.commands import Cog, Context, command
 
 from src.constants import CustomConstants
 from src.utility.bot import Vortex
@@ -18,9 +18,15 @@ class Fun(Cog, description="Fun commands of the bot."):
         amount_cm = randint(0, 40)
         amount_inch = amount_cm / 2.54
 
-        name = f"{member.display_name}'s" if member.display_name[-1] != "s" else member.display_name
+        name = (
+            f"{member.display_name}'s"
+            if member.display_name[-1] != "s"
+            else member.display_name
+        )
         penis = Embed(
-            title=f"{name}s dick is...", description=f"8{amount_cm * '='}D || {amount_cm} cm ({amount_inch:.3f} inch) long", color=self.bot.main_color
+            title=f"{name}s dick is...",
+            description=f"8{amount_cm * '='}D || {amount_cm} cm ({amount_inch:.3f} inch) long",
+            color=self.bot.main_color,
         )
 
         if amount_cm == 40:
@@ -39,9 +45,14 @@ class Fun(Cog, description="Fun commands of the bot."):
         dog = await self.bot.catdog(CustomConstants.DOG_URL)
         await ctx.send(str(dog))
 
-    @command(name="inspiro", brief="Generate a very deep and thought-about quote, totally not full of bullshit.")
+    @command(
+        name="inspiro",
+        brief="Generate a very deep and thought-about quote, totally not full of bullshit.",
+    )
     async def inspiro(self, ctx: Context):
-        async with self.bot.aiohttp_session.get("https://inspirobot.me/api?generate=true") as r:
+        async with self.bot.aiohttp_session.get(
+            "https://inspirobot.me/api?generate=true"
+        ) as r:
             if r.status == 200:
                 link = await r.text()
                 await ctx.send(str(link))

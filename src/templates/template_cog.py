@@ -1,7 +1,7 @@
 import logging
 
-from nextcord import Member, Embed
-from nextcord.ext.commands import Cog, command, Context
+from nextcord import Embed, Member
+from nextcord.ext.commands import Cog, Context, command
 
 from src.utility.bot import Vortex
 

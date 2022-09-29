@@ -1,18 +1,19 @@
+import datetime
 import logging
 import os
-import datetime
 import time
 from typing import Optional
 
-from dotenv import load_dotenv
 import aiohttp
 import nextcord
+from dotenv import load_dotenv
 from nextcord.ext.commands import Bot
-
 
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s]: %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s]: %(message)s"
+)
 
 
 class Vortex(Bot):
@@ -22,7 +23,7 @@ class Vortex(Bot):
             case_insensitive=True,
             intents=nextcord.Intents.all(),
             strip_after_prefix=True,
-            owner_id=int(os.getenv("BOT_OWNER_ID"))
+            owner_id=int(os.getenv("BOT_OWNER_ID")),
         )
         # Internal Stuff
         self.aiohttp_session: Optional[aiohttp.ClientSession] = None
@@ -49,7 +50,9 @@ class Vortex(Bot):
         return uptime
 
     def load_dir(self, directory) -> None:
-        files = [file[:-3] for file in os.listdir(directory) if not file.startswith("__")]
+        files = [
+            file[:-3] for file in os.listdir(directory) if not file.startswith("__")
+        ]
         for file in files:
             ext = f"{directory}.{file}"
             self.load_extension(ext)

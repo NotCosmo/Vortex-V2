@@ -13,7 +13,9 @@ class NotImplementedYet(NotImplementedError):
 
 def list_options(command: Union[Group, None]) -> str:
     if command:
-        params = ", ".join(f"`!!{cmd.qualified_name}`" for cmd in commands.Group.walk_commands(command))
+        params = ", ".join(
+            f"`!!{cmd.qualified_name}`" for cmd in commands.Group.walk_commands(command)
+        )
     else:
         params = "No subcommands available."
     return params

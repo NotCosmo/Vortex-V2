@@ -1,7 +1,8 @@
 from logging import info
 
-from nextcord import Embed, Interaction, ui, SelectOption
+from nextcord import Embed, Interaction, SelectOption, ui
 from nextcord.ext.commands import Cog, Context, command
+
 from src.utility.bot import Vortex
 
 
@@ -10,13 +11,17 @@ class HelpDropdown(ui.Select):
         options = [
             SelectOption(label="ℹ️ General", description="Shows general commands."),
             SelectOption(
-                label=":hammer_pick: Moderation", description="Shows moderation commands."
+                label=":hammer_pick: Moderation",
+                description="Shows moderation commands.",
             ),
         ]
 
         self.bot: Vortex = bot
         super().__init__(
-            placeholder="Choose what category you want", min_values=1, max_values=1, options=options
+            placeholder="Choose what category you want",
+            min_values=1,
+            max_values=1,
+            options=options,
         )
 
     async def callback(self, interaction: Interaction):
@@ -25,7 +30,9 @@ class HelpDropdown(ui.Select):
 
             cog_selected = self.bot.get_cog("General")
             embed = Embed(
-                title=self.values[0], description=cog_selected.description, colour=self.bot.colour
+                title=self.values[0],
+                description=cog_selected.description,
+                colour=self.bot.colour,
             )
             embed.set_thumbnail(url=self.bot.icon)
 
