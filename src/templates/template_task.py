@@ -1,7 +1,7 @@
 import logging
 from datetime import time
 
-from nextcord import Embed, Member
+import nextcord
 from nextcord.ext import commands, tasks
 
 from src.utility.bot import Vortex
