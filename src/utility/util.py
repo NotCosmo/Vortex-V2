@@ -1,4 +1,5 @@
 import os
+import textwrap
 from datetime import date, datetime, time
 from typing import Union
 
@@ -128,18 +129,21 @@ def create_cog_function(cog_name: str):
     class_name = camel_case(cog_name)
     path = os.getcwd()
     with open(f"{path}\\cogs\\{cog_name}.py", "w") as f:
-        to_write = f"""from nextcord import Embed, Message, Member
-from nextcord.ext.commands import Cog, command, group, Context
+        to_write = textwrap.dedent(
+            f"""
+        from nextcord import Embed, Message, Member
+        from nextcord.ext.commands import Cog, command, group, Context
 
-from src.utility.bot import Vortex
-
-
-class {class_name}(Cog):
-    def __init__(self, bot: CustomBot):
-        self.bot: CustomBot = bot
+        from src.utility.bot import Vortex
 
 
-def setup(bot: CustomBot):
-    bot.add_cog({class_name}(bot))
-    """
+        class {class_name}(Cog):
+            def __init__(self, bot: CustomBot):
+                self.bot: CustomBot = bot
+
+
+        def setup(bot: CustomBot):
+            bot.add_cog({class_name}(bot))
+            """
+        )
         f.write(to_write)
