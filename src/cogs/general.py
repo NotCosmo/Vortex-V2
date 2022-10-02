@@ -394,6 +394,11 @@ class General(Cog, description="General commands of the bot."):
 
         data_dict = xmltodict.parse(data)
         data: dict = data_dict.get("WhatPulse")
+        if not data:
+            return await ctx.send("WhatPulse did not return any data.")
+
+        if error := data.get("error"):
+            return await ctx.send(f"WhatPulse returned an error: {error}")
 
         user_url = f"https://whatpulse.org/{data.get('AccountName')}"
         whatpulse_embed = Embed(
