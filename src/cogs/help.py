@@ -34,7 +34,7 @@ class HelpDropdown(ui.Select):
                 description=cog_selected.description,
                 colour=self.bot.main_color,
             )
-            embed.set_thumbnail(url=self.bot.icon)
+            embed.set_thumbnail(url=self.bot.user.avatar.with_size(4096).url)
 
             cmds_text = ""
             count = 0
