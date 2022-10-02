@@ -278,12 +278,6 @@ class General(Cog, description="General commands of the bot."):
                     data.get("url").replace("?rel=0", "").replace("embed/", "watch?v=")
                 )
 
-                # https://www.youtube.com/embed/ts0Ek3nLHew
-                # url = url.replace("?rel=0", "")
-
-                # https://www.youtube.com/watch?v=ts0Ek3nLHew
-                # url = url.replace("embed/", "watch?v=")
-
                 apod_embed.url = url
 
                 await ctx.send(url)
