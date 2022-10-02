@@ -38,12 +38,16 @@ class Fun(Cog, description="Fun commands of the bot."):
     @command(name="cat", aliases=["catto"], brief="Gives you a catto")
     async def cat(self, ctx: Context):
         cat = await self.bot.catdog(CustomConstants.CAT_URL)
-        await ctx.send(str(cat)) if cat else await ctx.send("Getting a cat failed. How sad.")
+        await ctx.send(str(cat)) if cat else await ctx.send(
+            "Getting a cat failed. How sad."
+        )
 
     @command(name="dog", aliases=["doggo"], brief="Gives you a doggo")
     async def dog(self, ctx: Context):
         dog = await self.bot.catdog(CustomConstants.DOG_URL)
-        await ctx.send(str(dog)) if dog else await ctx.send("Getting a doggo failed, I feel miserable.")
+        await ctx.send(str(dog)) if dog else await ctx.send(
+            "Getting a doggo failed, I feel miserable."
+        )
 
     @command(
         name="inspiro",

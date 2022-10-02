@@ -318,9 +318,7 @@ class General(Cog, description="General commands of the bot."):
         }
 
         url = f"https://api.weatherapi.com/v1/current.json"
-        params = {"key": self.bot.WEATHER_API_KEY,
-                  "q": city,
-                  "aqi": "yes"}
+        params = {"key": self.bot.WEATHER_API_KEY, "q": city, "aqi": "yes"}
         async with self.bot.aiohttp_session.get(url, params=params) as r:
             if r.status == 200:
                 data: dict = await r.json()
