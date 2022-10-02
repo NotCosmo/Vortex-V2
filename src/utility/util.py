@@ -114,7 +114,7 @@ def italic_bold_message(message: str):
 def create_cog_function(cog_name: str):
     class_name = pascal_case(cog_name)
     path = os.getcwd()
-    with open(f"{path}\\cogs\\{cog_name}.py", "w") as f:
+    with open(f"{path}/cogs/{cog_name}.py", "w") as f:
         to_write = textwrap.dedent(
             f"""
         from nextcord import Embed, Message, Member
