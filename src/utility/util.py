@@ -67,7 +67,7 @@ def format_whatpulse_datetime(x: str) -> str:
     return format_date_time(obj)
 
 
-def camel_case(string):
+def pascal_case(string):
     return "".join(x.capitalize() for x in string.split("_"))
 
 
@@ -112,7 +112,7 @@ def italic_bold_message(message: str):
 
 
 def create_cog_function(cog_name: str):
-    class_name = camel_case(cog_name)
+    class_name = pascal_case(cog_name)
     path = os.getcwd()
     with open(f"{path}\\cogs\\{cog_name}.py", "w") as f:
         to_write = textwrap.dedent(
