@@ -28,7 +28,6 @@ class Vortex(Bot):
         # Internal Stuff
         self.aiohttp_session: Optional[aiohttp.ClientSession] = None
         self.token: Optional[str] = os.getenv("BOT_TOKEN")
-        self.icon = "https://cdn.discordapp.com/avatars/926513310642339891/36f01c4d80398bccdcf1ac094e6af7c4.png?size=4096"
         self.start_time = time.time()
 
         # API Keys
