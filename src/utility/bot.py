@@ -47,7 +47,7 @@ class Vortex(Bot):
         uptime = datetime.timedelta(seconds=difference)
         return uptime
 
-    def load_dir(self, directory) -> None:
+    def load_dir(self, directory: str) -> None:
         files = [
             file[:-3] for file in os.listdir(directory) if not file.startswith("__")
         ]
