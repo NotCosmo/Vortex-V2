@@ -387,13 +387,13 @@ class General(Cog, description="General commands of the bot."):
         url = f"https://api.whatpulse.org/user.php"
         params = {"user": username}
         async with self.bot.aiohttp_session.get(url, params=params) as r:
-            if r.status == 200:
-                data: str = await r.text()
+            data: str = await r.text()
+
+        if not data:
+            return await ctx.send("WhatPulse did not return any data.")
 
         data_dict = xmltodict.parse(data)
         data: dict = data_dict.get("WhatPulse")
-        if not data:
-            return await ctx.send("WhatPulse did not return any data.")
 
         if error := data.get("error"):
             return await ctx.send(f"WhatPulse returned an error: {error}")
