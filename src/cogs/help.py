@@ -74,4 +74,3 @@ class Help(Cog):
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(Help(bot))
-    info(f"{Help.__class__.__name__} cog loaded.")

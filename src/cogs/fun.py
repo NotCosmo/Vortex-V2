@@ -79,4 +79,3 @@ class Fun(Cog, description="Fun commands of the bot."):
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(Fun(bot))
-    info(f"{Fun.__class__.__name__} cog loaded.")

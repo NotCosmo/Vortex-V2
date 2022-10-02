@@ -440,4 +440,3 @@ class General(Cog, description="General commands of the bot."):
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(General(bot))
-    info(f"{General.__class__.__name__} cog loaded.")

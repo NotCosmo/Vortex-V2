@@ -13,4 +13,3 @@ class TemplateCog(Cog, description="General commands of the bot."):
 
 def setup(bot: Vortex) -> None:
     bot.add_cog(TemplateCog(bot))
-    logging.info(f"{TemplateCog.__class__.__name__} cog loaded.")
