@@ -30,7 +30,6 @@ class Vortex(Bot):
         self.token: Optional[str] = os.getenv("BOT_TOKEN")
         self.icon = "https://cdn.discordapp.com/avatars/926513310642339891/36f01c4d80398bccdcf1ac094e6af7c4.png?size=4096"
         self.start_time = time.time()
-        self.owner_id = int(os.getenv("BOT_OWNER_ID"))
 
         # API Keys
         self.NASA_API_KEY = os.getenv("NASA_API_KEY")
