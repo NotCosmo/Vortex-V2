@@ -50,9 +50,9 @@ class Fun(Cog, description="Fun commands of the bot."):
         brief="Generate a very deep and thought-about quote, totally not full of bullshit.",
     )
     async def inspiro(self, ctx: Context):
-        async with self.bot.aiohttp_session.get(
-            "https://inspirobot.me/api?generate=true"
-        ) as r:
+        url = "https://inspirobot.me/api"
+        params = {"generate": "true"}
+        async with self.bot.aiohttp_session.get(url, params=params) as r:
             if r.status == 200:
                 link = await r.text()
                 await ctx.send(str(link))

@@ -317,8 +317,11 @@ class General(Cog, description="General commands of the bot."):
             "NNW": "North-northwest",
         }
 
-        url = f"https://api.weatherapi.com/v1/current.json?key={self.bot.WEATHER_API_KEY}&q={city}&aqi=yes"
-        async with self.bot.aiohttp_session.get(url) as r:
+        url = f"https://api.weatherapi.com/v1/current.json"
+        params = {"key": self.bot.WEATHER_API_KEY,
+                  "q": city,
+                  "aqi": "yes"}
+        async with self.bot.aiohttp_session.get(url, params=params) as r:
             if r.status == 200:
                 data: dict = await r.json()
         try:
@@ -383,8 +386,9 @@ class General(Cog, description="General commands of the bot."):
 
     @command(name="whatpulse", aliases=["wp"], brief="Get stats from a whatpulse user")
     async def whatpulse(self, ctx: Context, username: str):
-        url = f"https://api.whatpulse.org/user.php?user={username}"
-        async with self.bot.aiohttp_session.get(url) as r:
+        url = f"https://api.whatpulse.org/user.php"
+        params = {"user": username}
+        async with self.bot.aiohttp_session.get(url, params=params) as r:
             if r.status == 200:
                 data: str = await r.text()
 
