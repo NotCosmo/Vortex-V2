@@ -23,53 +23,39 @@ def list_options(command: Union[Group, None]) -> str:
 
 
 def format_time(obj: time) -> str:
-    """
-    :return: string like "15:45:12"
-    """
+    """ :return: string like "15:45:12" """
     return obj.strftime("%H:%M:%S")
 
 
 def format_date(obj: date) -> str:
-    """
-    :return: string like "01.06.2022"
-    """
+    """ :return: string like "01.06.2022" """
     return obj.strftime("%d.%m.%Y")
 
 
 def format_date_from_string(x: str) -> str:
-    """
-    :return: parse date from "2022-06-01" string and return "01.06.2022"
-    """
+    """ :return: parse date from "2022-06-01" string and return "01.06.2022" """
     obj = datetime.strptime(x, "%Y-%m-%d")
     return format_date(obj)
 
 
 def format_datetime_from_string(x: str) -> str:
-    """
-    :return: parse date from "2022-06-01 15:45" string and return "01.06.2022"
-    """
+    """ :return: parse date from "2022-06-01 15:45" string and return "01.06.2022" """
     obj = datetime.strptime(x, "%Y-%m-%d %H:%M")
     return format_date_time(obj)
 
 
 def format_to_db_date(obj: date) -> str:
-    """
-    :return:string like "2022-06-01"
-    """
+    """ :return:string like "2022-06-01" """
     return obj.strftime("%Y-%m-%d")
 
 
 def format_to_db_datetime(obj: datetime) -> str:
-    """
-    :return: string like "2022-06-01 15:45:12"
-    """
+    """ :return: string like "2022-06-01 15:45:12" """
     return obj.strftime("%Y-%m-%d %H:%M:%S")
 
 
 def format_date_time(obj: datetime) -> str:
-    """
-    :return: string like "15:45:12, 01.06.2022"
-    """
+    """ :return: string like "15:45:12, 01.06.2022" """
     return obj.strftime("%H:%M:%S, %d.%m.%Y")
 
 
