@@ -37,9 +37,7 @@ class Vortex(Bot):
         self.WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
         # Versioning
-        self.major_version = os.getenv("BOT_MAJOR_VERSION")
-        self.minor_version = os.getenv("BOT_MINOR_VERSION")
-        self.patch_version = os.getenv("BOT_PATCH_VERSION")
+        self.major_version, self.minor_version, self.patch_version = os.getenv("BOT_VERSION").split(".")
 
         # Somewhat globals
         self.main_color: int = 0x00D0FF
