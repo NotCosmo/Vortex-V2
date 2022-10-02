@@ -1,7 +1,7 @@
 import os
 import textwrap
 from datetime import date, datetime, time
-from typing import Union
+from typing import Optional
 
 from nextcord.ext import commands
 from nextcord.ext.commands import Group
@@ -12,7 +12,7 @@ class NotImplementedYet(NotImplementedError):
         super().__init__("This command has not been implemented yet.")
 
 
-def list_options(command: Union[Group, None]) -> str:
+def list_options(command: Optional[Group]) -> str:
     if command:
         params = ", ".join(
             f"`!!{cmd.qualified_name}`" for cmd in commands.Group.walk_commands(command)
