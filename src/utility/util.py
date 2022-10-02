@@ -124,11 +124,11 @@ def create_cog_function(cog_name: str):
 
 
         class {class_name}(Cog):
-            def __init__(self, bot: CustomBot):
-                self.bot: CustomBot = bot
+            def __init__(self, bot: Vortex):
+                self.bot: Vortex = bot
 
 
-        def setup(bot: CustomBot):
+        def setup(bot: Vortex):
             bot.add_cog({class_name}(bot))
             """
         )
