@@ -322,15 +322,15 @@ class General(Cog, description="General commands of the bot."):
         async with self.bot.aiohttp_session.get(url, params=params) as r:
             if r.status == 200:
                 data: dict = await r.json()
-        try:
-            location = data["location"]
-            current = data["current"]
-            condition = current["condition"]
-            air_quality = current["air_quality"]
-        except UnboundLocalError:
-            return await ctx.send(
-                "I don't rember this town, perhaps specify the country..?"
-            )
+            elif r.status == 400:
+                return await ctx.send("I don't remember this town, perhaps specify the country...?")
+            elif r.status == 403:
+                return await ctx.send("The API is currently disabled.")
+
+        location = data["location"]
+        current = data["current"]
+        condition = current["condition"]
+        air_quality = current["air_quality"]
 
         thumbnail_url = f"https:{condition['icon']}"
 
