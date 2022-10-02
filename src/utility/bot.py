@@ -83,4 +83,4 @@ class Vortex(Bot):
         async with self.aiohttp_session.get(url) as r:
             if r.status == 200:
                 response = await r.json()
-        return response[0].get("url")
+                return response[0].get("url")
