@@ -13,6 +13,33 @@ from psutil import Process, virtual_memory
 from src.utility import util
 from src.utility.bot import Vortex
 
+US_EPA_INDEX = {
+    1: "Good",
+    2: "Moderate",
+    3: "Unhealthy for sensitive group",
+    4: "Unhealthy",
+    5: "Very unhealthy",
+    6: "Hazardous",
+}
+WIND_DIRECTIONS = {
+    "N": "North",
+    "NNE": "North-northeast",
+    "NE": "Northeast",
+    "ENE": "East-northeast",
+    "E": "East",
+    "ESE": "East-northeast",
+    "SE": "Southeast",
+    "SSE": "South-southeast",
+    "S": "South",
+    "SSW": "South-Southwest",
+    "SW": "Southwest",
+    "WSW": "West-southwest",
+    "W": "West",
+    "WNW": "West-northwest",
+    "NW": "Northwest",
+    "NNW": "North-northwest",
+}
+
 
 class General(Cog, description="General commands of the bot."):
     def __init__(self, bot: Vortex) -> None:
@@ -290,33 +317,6 @@ class General(Cog, description="General commands of the bot."):
 
     @command(name="weather", brief="Get weather info")
     async def weather(self, ctx: Context, *, city: str):
-        US_EPA_INDEX = {
-            1: "Good",
-            2: "Moderate",
-            3: "Unhealthy for sensitive group",
-            4: "Unhealthy",
-            5: "Very unhealthy",
-            6: "Hazardous",
-        }
-        WIND_DIRECTIONS = {
-            "N": "North",
-            "NNE": "North-northeast",
-            "NE": "Northeast",
-            "ENE": "East-northeast",
-            "E": "East",
-            "ESE": "East-northeast",
-            "SE": "Southeast",
-            "SSE": "South-southeast",
-            "S": "South",
-            "SSW": "South-Southwest",
-            "SW": "Southwest",
-            "WSW": "West-southwest",
-            "W": "West",
-            "WNW": "West-northwest",
-            "NW": "Northwest",
-            "NNW": "North-northwest",
-        }
-
         url = f"https://api.weatherapi.com/v1/current.json"
         params = {"key": self.bot.WEATHER_API_KEY, "q": city, "aqi": "yes"}
         async with self.bot.aiohttp_session.get(url, params=params) as r:
