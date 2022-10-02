@@ -42,7 +42,7 @@ class Vortex(Bot):
         self.patch_version = os.getenv("BOT_PATCH_VERSION")
 
         # Somewhat globals
-        self.main_color: int = 0xFFFFFF
+        self.main_color: int = 0x00D0FF
 
     def get_uptime(self) -> datetime.timedelta:
         difference = int(time.time() - self.start_time)
