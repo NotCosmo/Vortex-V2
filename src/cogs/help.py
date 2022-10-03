@@ -1,21 +1,27 @@
-import nextcord
-from nextcord import Embed, Interaction
+from logging import info
+
+from nextcord import Embed, Interaction, SelectOption, ui
 from nextcord.ext.commands import Cog, Context, command
-from utility.bot import Vortex
+
+from src.utility.bot import Vortex
 
 
-class HelpDropdown(nextcord.ui.Select):
+class HelpDropdown(ui.Select):
     def __init__(self, bot: Vortex):
         options = [
-            nextcord.SelectOption(label="ℹ️ General", description="Shows general commands."),
-            nextcord.SelectOption(
-                label=":hammer_pick: Moderation", description="Shows moderation commands."
+            SelectOption(label="ℹ️ General", description="Shows general commands."),
+            SelectOption(
+                label=":hammer_pick: Moderation",
+                description="Shows moderation commands.",
             ),
         ]
 
         self.bot: Vortex = bot
         super().__init__(
-            placeholder="Choose what category you want", min_values=1, max_values=1, options=options
+            placeholder="Choose what category you want",
+            min_values=1,
+            max_values=1,
+            options=options,
         )
 
     async def callback(self, interaction: Interaction):
@@ -24,9 +30,11 @@ class HelpDropdown(nextcord.ui.Select):
 
             cog_selected = self.bot.get_cog("General")
             embed = Embed(
-                title=self.values[0], description=cog_selected.description, colour=self.bot.colour
+                title=self.values[0],
+                description=cog_selected.description,
+                colour=self.bot.main_color,
             )
-            embed.set_thumbnail(url=self.bot.icon)
+            embed.set_thumbnail(url=self.bot.user.avatar.with_size(4096).url)
 
             cmds_text = ""
             count = 0
@@ -39,7 +47,7 @@ class HelpDropdown(nextcord.ui.Select):
             await interaction.response.send_message(embed=embed)
 
 
-class DropdownView(nextcord.ui.View):
+class DropdownView(ui.View):
     def __init__(self, bot: Vortex):
         self.bot: Vortex = bot
         super().__init__()
@@ -65,5 +73,4 @@ class Help(Cog):
 
 
 def setup(bot: Vortex) -> None:
-    print("Help loaded.")
     bot.add_cog(Help(bot))
